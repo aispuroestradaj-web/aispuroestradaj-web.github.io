@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jesus Aispuro | Engineering, Education & Photography</title>
+  <style>
+    /* --- 1. GLOBAL STYLES & COLOR VARIABLES --- */
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #8c1515; /* Stanford Cardinal Red */
+      --accent-hover: #6e1010;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* --- 2. NAVIGATION BAR --- */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* --- 3. HERO SECTION --- */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .skills-box {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .skills-box h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: #f1f5f9;
+      color: var(--text-main);
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* --- 4. SECTIONS & FILTER BUTTONS --- */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* --- 5. PROJECT CARDS GRID --- */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
+    .project-img-wrapper {
+      position: relative;
+    }
+
+    .project-img {
+      width: 100%;
+      height: 210px;
+      background-color: #e2e8f0;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-count-badge {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 0.6rem;
+      background: rgba(15, 23, 42, 0.8);
+      color: #fff;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-category {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    /* --- 5B. CLASSROOM TOOLS SHOP --- */
+    .storefront-banner {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .price-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .price-pill {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+
+    .shop-actions {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: auto;
+      padding-top: 0.75rem;
+    }
+
+    .btn-sm {
+      flex: 1;
+      text-align: center;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* --- 6. PHOTOGRAPHY GALLERY & LIGHTBOX --- */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      max-height: 550px;
+      overflow-y: auto;
+      padding: 1rem;
+      background: #f1f5f9;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .photo-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 4 / 3;
+      background: #cbd5e1;
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .photo-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: #fff;
+      padding: 1rem 0.75rem 0.5rem;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .photo-item:hover .photo-caption {
+      opacity: 1;
+    }
+
+    /* Lightbox Popup */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      height: 75vh;        /* Scales smaller photos up to 75% of the screen height */
+      width: auto;         /* Keeps the width proportional so nothing gets stretched */
+      max-width: 85vw;     /* Prevents wide photos from overflowing off the sides */
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .lightbox-caption {
+      color: #fff;
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: center;
+      max-width: 750px;
+    }
+
+    .lightbox-counter {
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      margin-top: 0.35rem;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      color: #fff;
+      font-size: 2.2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: none;
+      font-size: 2rem;
+      padding: 0.75rem 1.1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .lightbox-prev { left: 2rem; }
+    .lightbox-next { right: 2rem; }
+
+    /* --- 7. FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 2.5rem;
+      }
+      .lightbox img {
+        height: auto;
+        width: 88vw;
+        max-height: 75vh;
+      }
+      .lightbox-prev { left: 0.5rem; }
+      .lightbox-next { right: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">Jesus Aispuro</a>
+      <ul class="nav-links">
+        <li><a href="#projects">Engineering & EdTech</a></li>
+        <li><a href="#shop">Teacher Shop</a></li>
+        <li><a href="#photography">Photography</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div>
+      <h1>Mechanical & Electrical Engineer, Educator & Maker.</h1>
+      <p>
+        Stanford University student (Class of 2026) passionate about bridging hands-on mechanical design, electronics, and K–12 education to build interactive learning tools.
+      </p>
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">Explore My Builds</a>
+        <a href="#shop" class="btn btn-outline">Shop Classroom Tools</a>
+        <a href="#photography" class="btn btn-outline">View Photography</a>
+        <a href="resume.pdf" class="btn btn-outline" target="_blank">Download Resume (PDF)</a>
+      </div>
+    </div>
+
+    <!-- QUICK SKILLS SUMMARY -->
+    <div class="skills-box">
+      <h3>Tools & Fabrication</h3>
+      <div class="skill-tags">
+        <span class="tag">Fusion 360 (CAD)</span>
+        <span class="tag">3D Printing (PLA/PETG)</span>
+        <span class="tag">Arduino & ESP32</span>
+        <span class="tag">Python</span>
+        <span class="tag">Welding & Metal Forming</span>
+        <span class="tag">Laser Cutting</span>
+        <span class="tag">Woodworking</span>
+        <span class="tag">STEM Curriculum Design</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects">
+    <div class="section-header">
+      <h2>Featured Projects</h2>
+      <p style="color: var(--text-muted);">
+        Filter by discipline or click any project card to flip through prototype and build photos.
+      </p>
+    </div>
+
+    <!-- FILTER BUTTONS -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterProjects('all', this)">All Work</button>
+      <button class="filter-btn" onclick="filterProjects('mechatronics', this)">Mechatronics & CAD</button>
+      <button class="filter-btn" onclick="filterProjects('education', this)">EdTech & Teaching</button>
+      <button class="filter-btn" onclick="filterProjects('fabrication', this)">Fabrication</button>
+    </div>
+
+    <!-- EMPTY GRID: JavaScript builds your project cards inside here -->
+    <div class="project-grid" id="project-grid"></div>
+  </section>
+
+  <!-- TEACHER TOOLS SHOP SECTION -->
+  <section id="shop">
+    <div class="section-header">
+      <h2>Classroom & Maker Shop</h2>
+      <p style="color: var(--text-muted);">
+        Custom 3D-printed educational tools, manipulatives, and classroom organizers. Order ready-to-use physical prints or download the CAD/STL files to print at your school.
+      </p>
+    </div>
+
+    <!-- MAIN STOREFRONT PROFILE LINKS -->
+    <div class="storefront-banner">
+      <div>
+        <strong style="display: block; font-size: 1.05rem;">Browse My Full Digital Storefronts</strong>
+        <span style="color: var(--text-muted); font-size: 0.9rem;">Follow my shops for new classroom tools, custom requests, and free teacher downloads.</span>
+      </div>
+      <div class="btn-group">
+        <a href="https://www.etsy.com/people/4buxcjljm9te38tn" target="_blank" class="btn btn-primary" style="padding: 0.55rem 1.1rem; font-size: 0.9rem;">Etsy Shop (Physical Prints) ↗</a>
+        <a href="https://www.printables.com/@JesusAispuro_5721897" target="_blank" class="btn btn-outline" style="padding: 0.55rem 1.1rem; font-size: 0.9rem;">Printables / Cults3D (3D Files) ↗</a>
+      </div>
+    </div>
+
+    <!-- EMPTY GRID: JavaScript builds your shop cards inside here -->
+    <div class="project-grid" id="shop-grid"></div>
+  </section>
+
+  <!-- PHOTOGRAPHY SECTION -->
+  <section id="photography">
+    <div class="section-header">
+      <h2>Photography</h2>
+      <p style="color: var(--text-muted);">
+        Select a collection below to scroll through photos from my travels. Click any image to enlarge.
+      </p>
+    </div>
+
+    <!-- ALBUM CATEGORY BUTTONS (Defaults to View All) -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterPhotos('all', this)">View All</button>
+      <button class="filter-btn" onclick="filterPhotos('europe', this)">Europe</button>
+      <button class="filter-btn" onclick="filterPhotos('japan', this)">Japan</button>
+      <button class="filter-btn" onclick="filterPhotos('us', this)">United States</button>
+    </div>
+
+    <!-- EMPTY GRID: JavaScript builds your photos inside here -->
+    <div class="photo-grid" id="photo-grid"></div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <div class="section-header">
+      <h2>About Me</h2>
+    </div>
+    <p style="max-width: 800px; color: var(--text-muted); margin-bottom: 1rem;">
+      Hello, and thanks for stopping by my site! My goal is to share my interest and show the work I am doing in the education space. I have been an educator for many years, and I hope to merge education and technology to help teachers and students.
+    </p>
+    <p style="max-width: 800px; color: var(--text-muted); margin-bottom: 1rem;">
+      I am currently taking a gap year and will be continuing my master's and bachelor's degrees at Stanford University. I have been fortunate enough to travel through the different study abroad programs in Kyoto, Japan, and Florence, Italy. I hope you will enjoy the photos I have taken throughout the years, and I will continue to post whenever life becomes interesting!
+    </p>
+    <p style="max-width: 800px; color: var(--text-muted);">
+     This site was able to come to fruition through the help of Google’s AI, Gemini. I do not claim to be a web developer but AI has been a great resource to help me set up this website and be able to show my work. 
+    </p>
+  </section>
+
+  <!-- CONTACT FOOTER -->
+  <footer id="contact">
+    <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Let's Connect</h3>
+    <p style="margin-bottom: 1rem;">Interested in collaborating on engineering design, ed-tech hardware, or photography?</p>
+    <p>
+      <strong>Email:</strong> <a href="mailto:aispuroestradaj@gmail.com">aispuroestradaj@gmail.com</a> &nbsp;|&nbsp;
+      <!-- <strong>Phone:</strong> (916) 842-1493 &nbsp;|&nbsp; -->
+      <strong>Location:</strong> Stanford / Sacramento, CA
+    </p>
+  </footer>
+
+  <!-- LIGHTBOX POPUP WITH NEXT/PREVIOUS BUTTONS -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev" onclick="changeSlide(-1, event)">&#10094;</button>
+    <img id="lightbox-img" src="" alt="Enlarged view">
+    <button class="lightbox-nav lightbox-next" id="lightbox-next" onclick="changeSlide(1, event)">&#10095;</button>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <!-- JAVASCRIPT FOR INTERACTIVITY -->
+  <script>
+    // =========================================================================
+    // 1. YOUR ENGINEERING PROJECTS LIST (1 line per photo inside 'images'!)
+    // =========================================================================
+    const projectList = [
+      {
+        category: "mechatronics",
+        badge: "Mechatronics • Stanford ME 103",
+        title: "Proximity-Sensing Sheep Paper Towel Holder",
+        desc: "Designed and fabricated a tabletop paper towel holder combining sheet metal folding, welding, casting, and woodworking. Integrated an Arduino Uno R3, proximity sensor, and multi-mode RGB LED strip that illuminates when approached.",
+        skills: ["Welding", "Sheet Metal", "Arduino Uno"],
+        images: [
+          { src: "images/projects/shaundasheep/final-sheep.jpg", caption: "Final paper towel holder with welded steel pipe, sheet metal base, and magnetic cast head." },
+          { src: "images/projects/shaundasheep/glow.jpg", caption: "Paper towel holder in action, glowing." },
+          { src: "images/projects/shaundasheep/prototype-sheep.jpg", caption: "Original prototype made from cardboard, foam, and script to test the RGB strip." }
+        ]
+      },
+      {
+        category: "mechatronics",
+        badge: "Mechanical Design • Stanford ME 102",
+        title: "Mechanical Flip-Sign Clock",
+        desc: "Iterated from cardboard gear prototypes to a full working clock using 3D-printed gears, laser-cut metal weights, a plywood frame, and a woodshop handle.",
+        skills: ["3D Printing", "Laser Cutting", "Prototyping"],
+        images: [
+          { src: "images/projects/clock/complete-clock.jpg", caption: "Final design incorporating 3D-printed gears, laser-cut metal weights, and plywood frame." },
+          { src: "images/projects/clock/prototype-clock.jpg", caption: "Initial cardboard prototype created after extensive gear design iteration." }
+        ]
+      },
+      {
+        category: "education",
+        badge: "EdTech Hardware • EDUC 103A",
+        title: "3D-Printed Pokémon Phonics Tiles & Storybook",
+        desc: "Created custom 3D-printed matte PLA Pokémon letter tiles with increased infill for durability to help an elementary student stay engaged while practicing reading.",
+        skills: ["Fusion 360", "Elegoo Centauri", "Pedagogy"],
+        images: [
+          { src: "images/projects/letter-tiles/T-lettertile.jpg", caption: "Initial prototype printed in black PLA before switching to matte green for better letter legibility." },
+          { src: "images/projects/letter-tiles/complete-lettertile.jpg", caption: "Student engazging with custom tiles." },
+        ]
+      },
+      {
+        category: "mechatronics",
+        badge: "Client CAD Project",
+        title: "Drywall Electrical Box Cover Tool",
+        desc: "Commissioned by Drywall company to develop a custom PETG electrical cover guide for drywall installation. Built with Fusion 360 where client could fine-tune dimensions and tolerances.",
+        skills: ["Parameterized CAD", "Fusion 360", "PETG"],
+        images: [
+          { src: "images/projects/wall/prototype-red.jpg", caption: "Custom blue and red PETG design featuring smaller extrusions and a custom interior fit." },
+          { src: "images/projects/wall/prototype-wall.jpg", caption: "Existing market-standard cover protector with embossed logo used as a reference." }
+        ]
+      },
+      {
+        category: "mechatronics",
+        badge: "Embedded Systems • Dream It, Build It",
+        title: "Gesture-Controlled 32x64 LED Matrix & Weather Station",
+        desc: "Programmed a 32x64 LED matrix in Python to render custom bitmap artwork from an SD card with left/right swipe gesture navigation, alongside an internet-connected Adafruit PyPortal Titano weather display.",
+        skills: ["Python (Mu)", "Microcontrollers", "Soldering"],
+        images: [
+          { src: "images/projects/dream/weather-bit.jpg", caption: "Completed 32x64 LED Matrix in its shell alongside the internet-connected weather display." },
+          { src: "images/projects/dream/kirby-bit.jpg", caption: "First bitmap image displayed on the LED matrix showing Kirby." }
+        ]
+      },
+      {
+        category: "education",
+        badge: "STEM Education • Breakthrough Sacramento",
+        title: "Engineering & Physics Curriculum Design",
+        desc: "Served four summers as Head Science Teacher, designing hands-on middle and high school courses.",
+        skills: ["Curriculum Design", "Mentorship", "TinkerCAD"],
+        images: [
+          { src: "images/projects/education/bridge-bridge.jpg", caption: "1-meter span popsicle stick bridge built by students after submitting a formal plan of action." },
+          { src: "images/projects/education/load-bridge.jpg", caption: "Testing breaking weight with a hook scale—reaching a max load of 31.1 kg." },
+          { src: "images/projects/education/race-cars.jpg", caption: "Student-designed solar cars competing in the race sponsored by SMUD." }
+        ]
+      },
+      {
+        category: "fabrication",
+        badge: "CAD & Finishing",
+        title: "Polaroid Frame & Hand-Painted 3D Sculptures",
+        desc: "Engineered a multi-piece press-fit Polaroid frame in Fusion 360 with interchangeable wall-mount slots and a desktop stand. Also post-processed and hand-painted PLA models using sanding and automotive putty.",
+        skills: ["Tolerance Testing", "Post-Processing", "Acrylic Painting"],
+        images: [
+          { src: "images/projects/stuff/polaroid-japan.jpg", caption: "Multi-piece press-fit Polaroid frame holding instant photos from Japan." },
+          { src: "images/projects/stuff/polaroid-5.jpg", caption: "Polaroid frame could be expanded to hold 5 photos." },
+          { src: "images/projects/stuff/lapris-paint.jpg", caption: "Post-processed and hand-painted PLA Lapras sculpture with a hollow shell for holding jewelry" }
+        ]
+      }
+
+    ];
+
+    // =========================================================================
+    // 2. YOUR TEACHER SHOP LIST (Add new products here!)
+    // Leave physicalUrl or digitalUrl as "" if an item is only physical or only digital.
+    // =========================================================================
+    const shopList = [
+      {
+        badge: "Literacy & Reading",
+        title: "Fun Reading Strips/Bookmarks",
+        desc: "High-contrast, durable 3D-printed reading strips and bookmarks designed for elementary reading practice.",
+        physicalPrice: "TBD",
+        digitalPrice: "TBD (STL/3MF)",
+        physicalUrl: "https://www.etsy.com/people/4buxcjljm9te38tn",
+        digitalUrl: "https://www.printables.com/@JesusAispuro_5721897",
+        images: [
+          { src: "images/products/bookmarks/bookmarks.jpeg", caption: "Reading guides for students in fun shapes and colors — click the buttons on the card to order physical prints or download the 3D files." }
+        ]
+      },
+      {
+        badge: "Free Printable Book",
+        title: "Tangrams Activity & Geometry Book",
+        desc: "A printable story and puzzle book for teaching spatial reasoning and geometry with tangrams. Follow Rhomy as they explore the world!",
+        physicalPrice: "",
+        digitalLabel: "📖 Format",
+        digitalPrice: "Free PDF",
+        digitalBtnText: "Read / Download PDF ↗",
+        physicalUrl: "",
+        digitalUrl: "tangrams-book.pdf",
+        images: [
+          { src: "images/products/book/cover-tangram.png", caption: "Cover of my Tangrams Activity & Geometry Book." }
+        ]
+      },
+      
+    ];
+
+    // =========================================================================
+    // 3. YOUR PHOTOGRAPHY LIST (Add new photos here — just 1 line per photo!)
+    // Albums: "europe", "japan", "us", "education", "makerspace"
+    // =========================================================================
+    const photoList = [
+      // --- EUROPE ---
+      { album: "europe", src: "images/europe/florence-camera.jpg", caption: "Florence, Italy — Street Photography", alt: "Security cameras" },
+      { album: "europe", src: "images/europe/florence-car.jpg", caption: "Florence, Italy — Street Photography", alt: "Vehicles" },
+      { album: "europe", src: "images/europe/florence-street.jpg", caption: "Florence, Italy — Street Photography", alt: "Walking Along" },
+      { album: "europe", src: "images/europe/turin-pharaoh.jpg", caption: "Turin, Italy — Museum Photography", alt: "Mute" },
+      { album: "europe", src: "images/europe/cavalino-USA.jpg", caption: "Cavalino, Italy — Street Photography", alt: "The United States of America" },
+      { album: "europe", src: "images/europe/venice-anonymous.jpg", caption: "Venice, Italy — Street Photography", alt: "Slaughter" },
+      { album: "europe", src: "images/europe/florence-beggar.jpg", caption: "Florence, Italy — Street Photography", alt: "Greed" },
+      { album: "europe", src: "images/europe/florence-painting.jpg", caption: "Florence, Italy — Museum Photography", alt: "Duality" },
+      { album: "europe", src: "images/europe/london-army.jpg", caption: "London, United Kingdom — Street Photography", alt: "Anger & Peace" },
+      { album: "europe", src: "images/europe/london-protest.jpg", caption: "London, United Kingdom — Street Photography", alt: "Triangles" },
+      { album: "europe", src: "images/europe/london-eyes.jpg", caption: "London, United Kingdom — Street Photography", alt: "Voices" },
+      { album: "europe", src: "images/europe/london-silence.jpg", caption: "London, United Kingdom — Museum Photography", alt: "Silence" },
+      { album: "europe", src: "images/europe/london-sympathy.jpg", caption: "London, United Kingdom — Street Photography", alt: "Care" },
+      { album: "europe", src: "images/europe/gdansk-symmetry.jpg", caption: "Gdańsk, Poland — Street Photography", alt: "Symmetry" },
+      { album: "europe", src: "images/europe/gdansk-repeat.jpg", caption: "Gdańsk, Poland — Street Photography", alt: "Repetition" },
+      { album: "europe", src: "images/europe/gdansk-presence.jpg", caption: "Gdańsk, Poland — Street Photography", alt: "Presence" },
+
+      // --- JAPAN ---
+      { album: "japan", src: "images/japan/japan-man.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Left" },
+      { album: "japan", src: "images/japan/japan-bunnies.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Friendship" },
+      { album: "japan", src: "images/japan/japan-Byodo-in.jpg", caption: "Byodo-in, Japan — Street Photography", alt: "Byodo-in" },
+      { album: "japan", src: "images/japan/japan-Ecstasy.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Ecstasy" },
+      { album: "japan", src: "images/japan/japan-fall.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Ash" },
+      { album: "japan", src: "images/japan/japan-gambling.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Vice" },
+      { album: "japan", src: "images/japan/japan-grate.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Fall" },
+      { album: "japan", src: "images/japan/japan-lego.jpeg", caption: "Nagoya, Japan — Street Photography", alt: "Hero" },
+      { album: "japan", src: "images/japan/japan-peace.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Peace" },
+      { album: "japan", src: "images/japan/japan-shibuya.jpeg", caption: "Shibuya, Japan — Street Photography", alt: "2077" },
+      { album: "japan", src: "images/japan/japan-split.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Split" },
+      { album: "japan", src: "images/japan/japan-mirror.jpg", caption: "Kyoto, Japan — Street Photography", alt: "Within" },
+
+      // --- UNITED STATES ---
+      { album: "us", src: "images/us/us-781,329.jpg", caption: "Sacramento, California — Zoo Photography", alt: "781,329" },
+      { album: "us", src: "images/us/us-782,932.jpg", caption: "Sacramento, California — Zoo Photography", alt: "782,932" },
+      { album: "us", src: "images/us/us-783,031.jpg", caption: "Sacramento, California — Zoo Photography", alt: "783,031" },
+      { album: "us", src: "images/us/us-culture.jpg", caption: "Sacramento, California — Zoo Photography", alt: "Culture" },
+      { album: "us", src: "images/us/us-mizu.jpg", caption: "Sacramento, California — Zoo Photography", alt: "Mizu" },
+      { album: "us", src: "images/us/us-rhino.jpg", caption: "Sacramento, California — Zoo Photography", alt: "Hidden" },
+      { album: "us", src: "images/us/us-thoughts.jpg", caption: "Sacramento, California — Zoo Photography", alt: "Thoughts" }
+
+    ];
+
+    // =========================================================================
+    // 4. AUTOMATICALLY BUILD PROJECT CARDS, SHOP CARDS & PHOTOGRAPHY GALLERY
+    // =========================================================================
+    function renderProjects() {
+      const grid = document.getElementById('project-grid');
+      grid.innerHTML = projectList.map((project, index) => `
+        <div class="project-card" data-category="${project.category}" onclick="openProjectGallery(${index})">
+          <div class="project-img-wrapper">
+            <img src="${project.images[0].src}" alt="${project.title}" class="project-img" loading="lazy">
+            <span class="photo-count-badge">📷 ${project.images.length} Photos</span>
+          </div>
+          <div class="project-content">
+            <span class="project-category">${project.badge}</span>
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-desc">${project.desc}</p>
+            <div class="skill-tags">
+              ${project.skills.map(skill => `<span class="tag">${skill}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderShop() {
+      const grid = document.getElementById('shop-grid');
+      grid.innerHTML = shopList.map((item, index) => `
+        <div class="project-card" style="cursor: default;">
+          <div class="project-img-wrapper" style="cursor: pointer;" onclick="openShopGallery(${index})">
+            <img src="${item.images[0].src}" alt="${item.title}" class="project-img" loading="lazy">
+            <span class="photo-count-badge">🔍 Click to Enlarge</span>
+          </div>
+          <div class="project-content">
+            <span class="project-category">${item.badge}</span>
+            <h3 class="project-title">${item.title}</h3>
+            <p class="project-desc">${item.desc}</p>
+            <div class="price-row">
+              ${item.physicalPrice ? `<span class="price-pill">📦 Physical: ${item.physicalPrice}</span>` : ''}
+              ${item.digitalPrice ? `<span class="price-pill">${item.digitalLabel || '💾 3D File'}: ${item.digitalPrice}</span>` : ''}
+            </div>
+            <div class="shop-actions">
+              ${item.physicalUrl ? `<a href="${item.physicalUrl}" target="_blank" class="btn btn-primary btn-sm">Order Print ↗</a>` : ''}
+              ${item.digitalUrl ? `<a href="${item.digitalUrl}" target="_blank" class="btn btn-outline btn-sm">${item.digitalBtnText || 'Get 3D File ↗'}</a>` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderPhotos() {
+      const grid = document.getElementById('photo-grid');
+      grid.innerHTML = photoList.map((photo, index) => `
+        <div class="photo-item" data-album="${photo.album}" onclick="openPhotoGallery(${index})">
+          <img src="${photo.src}" alt="${photo.alt}" loading="lazy">
+          <div class="photo-caption">${photo.caption}</div>
+        </div>
+      `).join('');
+    }
+
+    // =========================================================================
+    // 5. FILTERING FUNCTIONS
+    // =========================================================================
+    let currentPhotoAlbum = 'all';
+
+    function filterProjects(category, buttonElement) {
+      const cards = document.querySelectorAll('#project-grid .project-card');
+      const buttons = document.querySelectorAll('#projects .filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      buttonElement.classList.add('active');
+
+      cards.forEach(card => {
+        card.style.display = (category === 'all' || card.getAttribute('data-category') === category) ? 'flex' : 'none';
+      });
+    }
+
+    function filterPhotos(album, buttonElement) {
+      currentPhotoAlbum = album;
+      const photos = document.querySelectorAll('#photo-grid .photo-item');
+      const photoButtons = document.querySelectorAll('#photography .filter-btn');
+
+      photoButtons.forEach(btn => btn.classList.remove('active'));
+      if (buttonElement) buttonElement.classList.add('active');
+
+      photos.forEach(photo => {
+        photo.style.display = (album === 'all' || photo.getAttribute('data-album') === album) ? 'block' : 'none';
+      });
+
+      document.getElementById('photo-grid').scrollTop = 0;
+    }
+
+    // =========================================================================
+    // 6. SLIDESHOW LIGHTBOX (Handles Projects, Shop Items, and Photography!)
+    // =========================================================================
+    let currentSlides = [];
+    let currentSlideIndex = 0;
+
+    function openProjectGallery(projectIndex) {
+      currentSlides = projectList[projectIndex].images;
+      currentSlideIndex = 0;
+      updateLightboxView();
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function openShopGallery(shopIndex) {
+      currentSlides = shopList[shopIndex].images;
+      currentSlideIndex = 0;
+      updateLightboxView();
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function openPhotoGallery(photoIndex) {
+      const clickedPhoto = photoList[photoIndex];
+
+      if (currentPhotoAlbum === 'all') {
+        currentSlides = photoList;
+      } else {
+        currentSlides = photoList.filter(photo => photo.album === currentPhotoAlbum);
+      }
+
+      currentSlideIndex = currentSlides.indexOf(clickedPhoto);
+      updateLightboxView();
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function updateLightboxView() {
+      const slide = currentSlides[currentSlideIndex];
+      document.getElementById('lightbox-img').src = slide.src;
+
+      const fullCaption = slide.alt ? `${slide.caption} — ${slide.alt}` : (slide.caption || '');
+      document.getElementById('lightbox-caption').textContent = fullCaption;
+      document.getElementById('lightbox-counter').textContent = `${currentSlideIndex + 1} / ${currentSlides.length}`;
+
+      const showArrows = currentSlides.length > 1 ? 'block' : 'none';
+      document.getElementById('lightbox-prev').style.display = showArrows;
+      document.getElementById('lightbox-next').style.display = showArrows;
+    }
+
+    function changeSlide(direction, event) {
+      if (event) event.stopPropagation();
+      currentSlideIndex = (currentSlideIndex + direction + currentSlides.length) % currentSlides.length;
+      updateLightboxView();
+    }
+
+    function closeLightbox(event) {
+      if (!event || event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('open');
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowRight') changeSlide(1);
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+    });
+
+    // =========================================================================
+    // 7. INITIALIZE ON PAGE LOAD
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProjects();
+      renderShop();
+      renderPhotos();
+      const firstPhotoBtn = document.querySelector('#photography .filter-btn');
+      filterPhotos('all', firstPhotoBtn);
+    });
+  </script>
+</body>
+</html>
